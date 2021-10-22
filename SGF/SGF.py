@@ -58,21 +58,5 @@ f.close()
 # 阈值设置
 
 
-# print("两张照片的方差为：%s"%(abs(ss1-ss2)))
-# x=range(30)
-# plt.figure("avg")
-# plt.plot(x,diff1,marker="*",label="$Frame1$")
-# plt.plot(x,diff11,marker="o",label="$Frame2$")
-#
-# plt.legend(prop=font1)
-# plt.tick_params(labelsize=10)
-# plt.xlabel("The side length of the image after scaling", font2)
-# plt.ylabel("Average value of pixels in each row", font2)
-# plt.savefig("./similarity_result1.jpg")
-#
-#
-# plt.legend()
-# plt.show()
-
 cv2.waitKey(0)
 cv2.destroyAllWindows()
