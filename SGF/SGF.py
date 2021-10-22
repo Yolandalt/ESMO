@@ -1,7 +1,5 @@
 import cv2
 import os
-import json
-import numpy as np
 import matplotlib.pyplot as plt
 font1 = {'family': 'Times New Roman',
          'weight': 'normal',
@@ -31,7 +29,7 @@ def getdiff(img):     #定义边长
 
 
 dir_all=[]
-filePath = './archive/train/'
+filePath = 'archive\\train\\'
 for i in os.walk(filePath):
     dir_all = i[2]
 print(dir_all)
@@ -39,37 +37,26 @@ img1 = 0
 diff1 = 0
 img11 = 0
 diff11 = 0
-simirarity = np.zeros((len(dir_all),len(dir_all)))
-
+simirarity = []
 for i in range(len(dir_all)):
-    img1 = cv2.imread("./archive/train/"+dir_all[i])
-    diff1 = getdiff(img1)
-    ss1 = getss(diff1)
+    img1=cv2.imread("./archive/train/"+dir_all[i])
+    diff1=getdiff(img1)
     for j in range(len(dir_all)):
-        img11 = cv2.imread("./archive/train/"+dir_all[j])
-        diff11 = getdiff(img11)
-        ss2 = getss(diff11)
-        s = 0
-        if abs(ss1-ss2) == 0:
-            s = 0
-        else:
-            s = round(1/abs(ss1-ss2),6)*10000
-        simirarity[i][j] = s
+        img11=cv2.imread("./archive/train/"+dir_all[j])
+        diff11=getdiff(img11)
 
-# print(type(simirarity))
+    ss1=getss(diff1)
+    ss2=getss(diff11)
+    simirarity.append(abs(ss1-ss2))
 
-dir = "./Results_SGF_two.txt" # 通过扩展名指定文件存储的数据为json格式
-np.savetxt(dir, simirarity)
-# dataset = np.loadtxt(dir)
-# print(dataset)
-# print(type(dataset))
-
-# f = open(dir, "w")
-# for i in range(len(simirarity)):
-#     for j in range(len(simirarity)):
-#         f.write(str(round(item, 2)) + ",")
-# f.close()
+print(simirarity)
+dir = "./Results_SGF.txt"
+f = open(dir, "w")
+for item in simirarity:
+    f.write(str(round(item, 2))+ ",")
+f.close()
 # 阈值设置
+
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()

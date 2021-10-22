@@ -27,9 +27,6 @@ Similarity = np.loadtxt(dir)
 # print(Similarity)
 # 阈值设置
 
-
-
-
 # 一共999张图片
 T_th = [0.1, 0.5, 5, 10, 15, 50, 100, 300,1000,3000]
 # T_th = [ 150, 3000]
