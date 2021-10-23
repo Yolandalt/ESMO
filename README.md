@@ -19,6 +19,10 @@ This code includes three parts, i.e., SGF, edgeVideo measurements, target recogn
 
   Dataset: COCO dataset, refers to Tsung-Yi Lin, Michael Maire, Serge Belongie, Lubomir Bourdev, Ross Girshick, James Hays, and Pietro Perona. Microsoft coco: Common objects in context, 2015.
 
-5. TGA-FSMC
-After measurement, the measurement data set can be obtained，which can be found in file
+3. TGA-FSMC
+
+   After measurement, the measurement data set can be obtained. We use the measurement data for evaluating the proposed scheme.
+   
+   
+   
 
