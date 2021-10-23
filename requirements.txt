@@ -2,3 +2,6 @@ numpy
 scipy
 matplotlib
 pandas
+opencv
+detectron2
+cv2
