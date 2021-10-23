@@ -23,6 +23,9 @@ This code includes three parts, i.e., SGF, edgeVideo measurements, target recogn
 
    After measurement, the measurement data set can be obtained. We use the measurement data for evaluating the proposed scheme.
    
+   The measurement data can be found in examples/TargetRecognition/data.
+   
+   
    
    
 
