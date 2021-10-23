@@ -21,9 +21,9 @@ This code includes three parts, i.e., SGF, edgeVideo measurements, target recogn
 
 3. TGA-FSMC
 
-   After measurement, the measurement data set can be obtained. We use the measurement data for evaluating the proposed scheme.
+After measurement, the measurement data set can be obtained. We use the measurement data for evaluating the proposed scheme.
    
-   The measurement data can be found in examples/TargetRecognition/data.
+The measurement data can be found in examples/TargetRecognition/data.
    
    
    
