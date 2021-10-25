@@ -36,11 +36,12 @@ The source code is for evaluating the TGA-FSMC scheme in this paper, which is ba
 
 The entry file can be found in examples/demo_edgeVideo_targetRecognition.py. Specifically, the crossover.py, mutation.py, ranking.py and selection.py can be found at sko/operations.
 
-Dataset: the measurement data that can be found at examples/TargetRecognition/data.
+Dataset: the measurement data can be found at examples/TargetRecognition/data.
 
 Main requirements: numpy.
 
-Location: Min4-FSMC/examples/demo_edgeVideo_targetRecognition.py
+Location: This part includes the examples, sko and EdgeVideoClass files. The entry file can be found in examples/demo_edgeVideo_targetRecognition.py. Additionally, the measurement data can be found at examples/TargetRecognition/data and the examples/TargetRecognition.py will read the measurements data and compute the fitness value for TGA-FSMC algorithm. The crossover.py, mutation.py, ranking.py and selection.py can be found at sko/operations and the GA_TR.py is the a class file for GA algorithm, which will evolve from generation to generation to obtain the optimal strategy. Finally, the EdgeVideoClass file includes the Caching.py and User.py, which initialize caching variables and define some parameters of the users.
+
 
 
 
