@@ -8,41 +8,39 @@ font2 = {'family': 'Times New Roman',
          'weight': 'normal',
          'size': 20,
          }
-def getss(list):     #计算平均值
-    avg=sum(list)/len(list)     #定义方差变量ss，初值为0
-    ss=0     #计算方差
+
+def getss(list):     # Calculate the average
+    avg=sum(list)/len(list)     # Define the variance variable ss, the initial value is 0
+    ss=0     # Calculate variance
     for l in list:
-        ss+=(l-avg)*(l-avg)/len(list)     #返回方差
+        ss+=(l-avg)*(l-avg)/len(list)     # Return variance
     return ss
 
-#获取每行像素平均值
-def getdiff(img):     #定义边长
-    Sidelength=30     #缩放图像
-    img=cv2.resize(img,(Sidelength,Sidelength),interpolation=cv2.INTER_CUBIC)     #灰度处理
-    gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)     #avglist列表保存每行像素平均值
-    avglist=[]     #计算每行均值，保存到avglist列表
+# Get the average value of pixels in each row
+def getdiff(img):     # Define side length
+    Sidelength=30     # Zoom image
+    img=cv2.resize(img,(Sidelength,Sidelength),interpolation=cv2.INTER_CUBIC)     # Grayscale processing
+    gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)     # The list saves the average value of each row of pixels
+    avglist=[]     # Calculate the average of each row and save it to the list
     for i in range(Sidelength):
         avg=sum(gray[i])/len(gray[i])
-        avglist.append(avg)     #返回avglist平均值
+        avglist.append(avg)     # Returns the average value
     return avglist
 
 img1=cv2.imread("./1.jpg")
 diff1=getdiff(img1)
 print(diff1)
-# print('img1:',getss(diff1))
 
 img11=cv2.imread("./2.jpg")
 diff11=getdiff(img11)
-# print('img11:',getss(diff11))
 
 img111=cv2.imread("./3.jpg")
 diff111=getdiff(img111)
-# print('img11:',getss(diff11))
 
 ss1=getss(diff1)
 ss2=getss(diff11)
 ss3=getss(diff111)
-# print("两张照片的方差为：%s"%(abs(ss1-ss2)))
+
 x=range(30)
 plt.figure("avg")
 plt.plot(x,diff1,marker="*",color='#cc66ff', label="$Frame1$")
