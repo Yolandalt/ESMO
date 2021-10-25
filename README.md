@@ -1,4 +1,4 @@
-This project is the code for Min^4-FSMC Project (corresponding to the TheWebConf 2022 paper "Min4-FSMC: Lightweight Frame Scheduling and Model Caching
+This project is the code for Min4-FSMC Project (corresponding to the TheWebConf 2022 paper "Min4-FSMC: Lightweight Frame Scheduling and Model Caching
 for Multi-Edge Video Analytics").
 
 Link of TheWebConf 2022: https://www2022.thewebconf.org/   
