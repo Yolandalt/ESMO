@@ -1,4 +1,4 @@
-# 整合数据
+# Integrate data
 import json
 
 def readData(dir):
