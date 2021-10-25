@@ -1,37 +1,33 @@
 This project is the code for Min^4-FSMC Project (corresponding to the TheWebConf 2022 paper "Min4-FSMC: Lightweight Frame Scheduling and Model Caching
 for Multi-Edge Video Analytics").
-Link of SIGCOMM 2019: http://conferences.sigcomm.org/sigcomm/2019/  Link of our paper: https://dlnext.acm.org/doi/abs/10.1145/3341302.3342063  This project has two part:  (1) The simulation source code is for readers to regenerate the main experimental results in the paper. We present the source code of both Pano and the baseline here, so readers can make a comparison easily.
- (2) The system source code is for readers to understand how we implemented a "user percevied quality driven" 360 video streaming. We present all modules in our system here. But we acknowledge that it still has not reached the level for commercial use.
 
-# 11111
+Link of TheWebConf 2022: https://www2022.thewebconf.org/   
 
-The implementation source code and measurement data of Min^4-FSMC scheme.
+This project has three part:  
 
-This code includes three parts, i.e., SGF, edgeVideo measurements, target recognition (this can be TGA-FSMC scheme).
+## (1) SGF Mechanism
 
-1. SGF
+The source code is for evaluating the effectiveness of SGF mechanism in this paper. It include similarity calculation and frames filterring.
 
-  requirement:cv2 
-  
-  including similarity calculation and frames filterring
-  
-  dataset can be found at: https://www.kaggle.com/akshaybapat04/frames-from-video
-  
-2. edge video measurements
+The dataset used for SGF mechanism can be found at: https://www.kaggle.com/akshaybapat04/frames-from-video. This is a dataset that can provide the video frames sampled from video streams.
 
-  requirements:opencv and detectron2
-  
-  this can be seen in edgeVideo_measurements,and the enviroment.py is the main file. 
-  After configuration, it is packaged as a docker and can be placed on nodes with different CPU frequencies for measurements.
+Main requirement: cv2. 
 
-  Dataset: COCO dataset, refers to Tsung-Yi Lin, Michael Maire, Serge Belongie, Lubomir Bourdev, Ross Girshick, James Hays, and Pietro Perona. Microsoft coco: Common objects in context, 2015.
+## (2) edge video analytics measurements
 
-3. TGA-FSMC
+The system source code is for readers to understand how we implemented a measurement for edge video analytics applications. In this measurement, the detectron2 can be used as our object recognition platform, which can be found at: https://github.com/facebookresearch/detectron2. 
 
-After measurement, the measurement data set can be obtained. We use the measurement data for evaluating the proposed scheme.
-   
-The measurement data can be found in examples/TargetRecognition/data.
+After configuration, it is packaged as a docker and can be placed on diverse nodes with different CNN models for measurements. After the measurements, the practical measurement data can be obtained at examples/TargetRecognition/data, which main includes the processing latency, energy cconsumption cost and video analytics accuracy.
 
+Main requirements: opencv and detectron2.
+
+The dataset used for measurements is the COCO dataset that can be found at: https://cocodataset.org/#download.
+
+There are two reasons for choosing the COCO dataset instead of the video stream-based dataset. On a one hand, the selected CNN models are trained based on the COCO dataset. On the other hand, after filtering by the SGF mechanism, the object of scheduling decision will become video frames. Directly selecting the COCO dataset can simplify our experimental process.
+
+## (3) TGA-FSMC scheme
+
+The source code is for evaluating the TGA-FSMC scheme in this paper, which is based on the measurement dataset in the second part.
 
 
 
