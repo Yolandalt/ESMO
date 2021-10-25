@@ -27,7 +27,8 @@ There are two reasons for choosing the COCO dataset instead of the video stream-
 
 Main requirements: opencv and detectron2.
 
-Location: Min4-FSMC/edgeVideo_measurements/environment.py.
+Location: Min4-FSMC/edgeVideo_measurements/environment.py. The environment.py is the main file of the measuremts.
+The config_name.json notes the name of CNN models and the pic_name.json notes the picture name of video frames. They will be generated during the process of running the object recognition application.
 
 ## (3) TGA-FSMC scheme
 
