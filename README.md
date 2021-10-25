@@ -27,7 +27,7 @@ There are two reasons for choosing the COCO dataset instead of the video stream-
 
 Main requirements: opencv and detectron2.
 
-Location: Min4-FSMC/edgeVideo_measurements.
+Location: Min4-FSMC/edgeVideo_measurements/environment.py.
 
 ## (3) TGA-FSMC scheme
 
