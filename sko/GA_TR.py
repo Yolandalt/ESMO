@@ -109,7 +109,7 @@ class GA_EdgeVideo(GeneticAlgorithmBase):
     def crtbp(self):
         # create the population
         # The population is population number * chromosome length, and the value is
-        # (a random number between 0 and 7, which means unloading to different computing nodes)
+        # (a random number between 0 and 6, which means unloading to different computing nodes)
         # According to the given model cache decision, make the initialization task offload decision
         num_model_in_edge = []  # The number of models on each edge node
         num_model_in_edge.append(3)  # Probability of unloading to local
@@ -121,7 +121,7 @@ class GA_EdgeVideo(GeneticAlgorithmBase):
         num_model_in_edge.append(5)
         rate = num_model_in_edge/np.sum(num_model_in_edge)
         self.Chrom = np.random.choice(a=range(len(num_model_in_edge)), size=[self.size_pop, self.len_chrom], p=rate)
-        # self.Chrom = np.random.randint(0,8,size=[self.size_pop, self.len_chrom])
+        # self.Chrom = np.random.randint(0,7,size=[self.size_pop, self.len_chrom])
         if len(self.last_best_offloading_decision):  # Not empty, not the first time
             self.Chrom[0] = self.last_best_offloading_decision  # Replaced with the best unloading decision from the previous round
             print("Non-empty, replace the best decision")
