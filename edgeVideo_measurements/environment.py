@@ -15,9 +15,8 @@ from pycocotools.cocoeval import COCOeval
 import cv2
 from detectron2 import model_zoo
 import random
-ACTION_NUMS = 7 # 动作 表示卸载的节点 
-# 动作空间 表明动作
-ACTION_SPACE = {'Offload-Decision': [i for i in range(0, ACTION_NUMS)] } # 0 表示本地 1 表示 cloud 2-6表示 对应的边缘节点
+ACTION_NUMS = 7 # action
+ACTION_SPACE = {'Offload-Decision': [i for i in range(0, ACTION_NUMS)] } 
 redis_conn = redis.Redis(host='127.0.0.1', port=6379)
 TESTING = 0
 TRAINING = 1
@@ -36,7 +35,7 @@ a_5 = [67,70]
 a_6 = np.arange(72,83,1).tolist()
 a_7 = np.arange(84,91,1).tolist()
 index_catId = a_0 + a_1 + a_2 + a_3 + a_4 +a_5 + a_6 + a_7
-# 确定图片队列
+# the picture queue
 def getPicFiles():
     filePath = '/home/lt/home/yison/code/mec/datasets/val2017'
     for dirpath, dirnames, filenames in os.walk(filePath):
@@ -152,36 +151,31 @@ class AtariWrapper:
         """
 
         return self.state
-# 仿真环境
+# environment
 class Env:
     
     def __init__(self,
-                 n_edge=6,  # MEC数量
-                 n_user=1  # 移动设备数（用户数量）
+                 n_edge=6,  
+                 n_user=1  
                  ):
         self.n_edge = n_edge
         self.observation_space = [1, 31]
         self.action_space = ACTION_SPACE['Offload-Decision']
         self.n_user = n_user
         self.env_step = 0
-        # # 网络拓扑的起始经纬度 可以考虑后期优化代码 训练边缘节点的时候 化为图片的格式
+        
         # self.longitude1 = 116.0
         # self.longitude2 = 116.8
         # self.latitude1 = 39.5
         # self.latitude2 = 40.3
 
-        # 创建用户
+        # user
         self.users = []
-        # 随机选择用户数据的基础ID，不要每次打开的用户都是那几个
         for i in range(self.n_user):
-            # 从数据中随机选择用户id数据
             Open_id = np.random.randint(0, 10000)
             # print("Open_id"+str(Open_id))
-            # 创建用户
             self.users.append(User(user_id=Open_id, task_queue_cap=250))
-            # 获取用户位置数据
             self.users[i].user_location_list_, self.users[i].user_speed_list_ = user_trajectory(Open_id)
-
 
         self.reset()
 
@@ -191,13 +185,12 @@ class Env:
         self.done = False
         self.env_step = 0
     def step(self, action): 
-        # 每隔一段时间更新模型参数 
         reward = 0
         self.env_step = self.env_step + 1
         user = self.users[0]
-        required_accuracy = user.img_accuracy # 获取所需精度
-        pic_accuracy, time_used, cpu_time_used = user.user_step([action, 0]) # 图片精度、程序运行时间、CPU运行时间（能耗）
-        reward = pic_accuracy/required_accuracy*1000 - time_used - cpu_time_used                # 精度归一化-时延-能耗 越高越好
+        required_accuracy = user.img_accuracy # accuracy
+        pic_accuracy, time_used, cpu_time_used = user.user_step([action, 0]) # Picture accuracy, program running time, CPU running time (energy consumption)
+        reward = pic_accuracy/required_accuracy*1000 - time_used - cpu_time_used                # Accuracy normalization-delay-energy consumption The higher the better
         if reward < 0:
             reward = 0
         if self.env_step == 250:
@@ -207,12 +200,11 @@ class Env:
         state = []
         user = self.users[0]
         user_location = user.user_location_list_[self.env_step]
-        # 位置
         state.append(user_location[0])
         state.append(user_location[1])
-        # 精度
+        # accuracy
         state.append(user.get_current_pricision())
-        # 节点未处理图片队列
+        # The node has not processed the image queue
         for i in range(1, 7):
             stream_name = 'edge_node_' + str(i)
             state.append(int(redis_conn.xlen(stream_name)))
@@ -226,73 +218,19 @@ class Env:
         for j in model_list:
             state.append(j)
         return state
-    # 更换节点缓存的模型
+    # Replace the node cache model
     def update_mec_node(self, action):
         return
-    # 列表元素排序，然后取出对应元素的索引
     def sort_index(self, list_, element):
         element_index = 0
         if element in list_:
             list_ = sorted(list_)
             element_index = list_.index(element)
         else:
-            print("查找的元素不在列表里面")
+            print("None")
         return element_index
 
-    # 根据不同的优先级将用户列表排序
-    # 有优先级相等的情况，则根据第一个出现的首先计算
-    def sort_by_priotiry(self, list_user):
-        # a = list_user
-        # 按不同优先级排序后的用户列表(用user_id来表示)
-        list_user_ran = np.zeros(len(list_user))
-        list_user_mec = np.zeros(len(list_user))
-        # 有优先级相等的情况，放置覆盖
 
-        priority_ran = []
-        priority_mec = []
-
-        # 取出优先级
-        for user in list_user:
-            priority_ran.append(user.get_priority_slicing())
-            priority_mec.append(user.get_priority_mec_resources())
-        # 将所有优先级排序(从小到大)
-        priority_ran = list(sorted(priority_ran))
-        priority_mec = list(sorted(priority_mec))
-
-        for user in list_user:
-            # 取出该用户优先级
-            # RAN
-            priority_slicing_original = user.get_priority_slicing()
-            priority_slicing_ep = priority_ran.index(priority_slicing_original)+1
-            # 看是否存在了，否则会覆盖
-            repeating_prio_num1 = priority_ran.count(priority_slicing_original)
-            if repeating_prio_num1 > 1:  # 至少一个
-                count = 0
-                while count < repeating_prio_num1:
-                    if list_user_ran[int(priority_slicing_ep)-1+count] == 0:
-                        list_user_ran[int(priority_slicing_ep)-1+count] = user.user_id
-                        break
-                    count = count+1
-            else:
-                list_user_ran[int(priority_slicing_ep) - 1] = user.user_id
-
-            # MEC
-            priority_mec_original = user.get_priority_mec_resources()
-            priority_mec_ep = priority_mec.index(priority_mec_original)+1
-            # 看是否存在了，否则会覆盖
-            repeating_prio_num2 = priority_mec.count(priority_mec_original)
-            if repeating_prio_num2 > 1:  # 至少一个
-                count = 0
-                while count < repeating_prio_num2:
-                    if list_user_mec[int(priority_mec_ep)-1+count] == 0:
-                        list_user_mec[int(priority_mec_ep)-1+count] = user.user_id
-                        break
-                    count = count+1
-            else:
-                list_user_mec[int(priority_mec_ep) - 1] = user.user_id
-        # a = list(list_user_ran)
-        # b = list(list_user_ran)
-        return list(list_user_ran), list(list_user_ran)
 # 用户本地就缓存一个模型
 class User:
     def __init__(self,
@@ -467,57 +405,4 @@ class Cloud:
         self.cloud_capability_net = cloud_capability_net
         self.cloud_dist = cloud_dist
         self.cloud_R = cloud_R
-# 求两个点（经纬度）之间的距离(单位为km)
-def get_distance(lon_a, lat_a, lon_b, lat_b):
-    radlat1 = math.radians(float(lat_a))
-    radlat2 = math.radians(float(lat_b))
-    a = radlat1 - radlat2
-    b = math.radians(float(lon_a)) - math.radians(float(lon_b))
-    s = 2 * math.asin(math.sqrt(pow(math.sin(a/2),2) + math.cos(radlat1) * math.cos(radlat2)*pow(math.sin(b/2),2)))
-    earth_radius = 6378.137
-    s = s * earth_radius
-    return s  # 单位m
-def user_trajectory(user_id):
-    f = open("./data/taxi_log_2008_by_id/" + str(user_id) + ".txt")
-    lines = f.readlines()
-    user_location_list = []
-    user_speed_list = []
-    flag = 0
-    time1 = ''
-    time2 = ''
-    longitude1 = 0
-    latitude1 = 0
-    longitude2 = 0
-    latitude2 = 0
-    for item in lines:
-        flag = flag+1
-        item = item.strip('\n')
-        list0 = item.split(",")
-        # 用户位置
-        user_location_list.append([list0[2], list0[3]])
-        # 用户时间算出用户速度
-        # 时间
-        if flag <= 1:
-            longitude1 = list0[2]
-            latitude1 = list0[3]
-            time1 = datetime.strptime(list0[1], "%Y-%m-%d %H:%M:%S")
-        else:
-            longitude2 = list0[2]
-            latitude2 = list0[3]
-            time2 = datetime.strptime(list0[1], "%Y-%m-%d %H:%M:%S")
-        if time1 != ''and time2 != '':
-            time_diff = (time2 - time1).seconds
-            time1 = time2
-            # 求距离
-            # print(longitude1,latitude1,longitude2,latitude2)
-            dist = get_distance(longitude1, latitude1, longitude2, latitude2)
-            longitude1 = longitude2
-            latitude1 = latitude2
-            # 求速度
-            if time_diff != 0:
-                speed = round(dist/time_diff, 2)   # 单位m/s
-                user_speed_list.append(speed)
-    return user_location_list, user_speed_list
-# e = Env(6,1)
-# a = e.step(1)
-# print(e.get_state())
+
