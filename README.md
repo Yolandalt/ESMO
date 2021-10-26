@@ -55,10 +55,15 @@ First, download the whole source code from the link. Second, enter the directory
 1) Configure OpenCV and detectron2 environment.
 2) Prepare different computation nodes with divise CPU frequencies.
 3) At each node:
+
    a) Download the COCO dataset from the https://cocodataset.org/#download.
+   
    b) Select CNN models from config_name.json and revise the user_model_list in environment.py. 
+   
    c) Run the environment.py for measuring the video analytics performance, including processing delay, energy consumption cost and video analytics accuracy.
+   
    d) Save as a result file.
+   
 4) For simplicity, instead of configuring the above environment on each node, the entire environment on a node can be packaged as a docker mirror file and placed directly on other nodes to run docker. For how to use docker, see https://www.docker.com/. 
 
 
