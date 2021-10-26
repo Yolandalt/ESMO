@@ -94,17 +94,6 @@ class TR_Class:
         self.TR_Result_node5.append(self.ReadTRResults("./TargetRecognition/data/jf/mask_rcnn_R_101_FPN_3x.json"))
         self.TR_Result_edge_all.append(self.TR_Result_node5)
 
-        # node6
-        self.TR_Result_node6 = []
-        self.TR_Result_node6.append(self.ReadTRResults("./TargetRecognition/data/jf/mask_rcnn_R_50_C4_1x.json"))
-        self.TR_Result_node6.append(self.ReadTRResults("./TargetRecognition/data/103/mask_rcnn_R_50_C4_3x.json"))
-        self.TR_Result_node6.append(self.ReadTRResults("./TargetRecognition/data/local/mask_rcnn_R_50_DC5_3x.json"))
-        self.TR_Result_node6.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_50_FPN_1x.json"))
-        self.TR_Result_node6.append(self.ReadTRResults("./TargetRecognition/data/103/mask_rcnn_R_101_C4_3x.json"))
-        self.TR_Result_node6.append(self.ReadTRResults("./TargetRecognition/data/242/mask_rcnn_R_101_DC5_3x.json"))
-        self.TR_Result_node6.append(self.ReadTRResults("./TargetRecognition/data/103/mask_rcnn_R_101_FPN_3x.json"))
-        self.TR_Result_edge_all.append(self.TR_Result_node6)
-
         a = self.TR_Result_edge_all
 
     def ReadTRResults(self, dir):
