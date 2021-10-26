@@ -48,15 +48,19 @@ First, download the whole source code from the link. Second, enter the directory
 ## 1. Running SGF Mechanism
 1) Using the 1.jpg, 2.jpg and 3.jpg as the examples to run the SGF/Similarity2.py for illustrating the similarity among different frames.
 2) Download the dataset from https://www.kaggle.com/akshaybapat04/frames-from-video.
-3) Run the SGF.py for calculating the similarity of the frames in the dataset, and write as a txt file for recording.
+3) Run the SGF.py for calculating the similarity of the frames in the dataset, and save as a txt file for recording.
 4) Run the PlotFigure_SGF.py for filtering the frames.
 
 ## 2. edge video analytics measurements
 1) Configure OpenCV and detectron2 environment.
-2) Download the COCO dataset from the https://cocodataset.org/#download.
-3) Select the CNN model and Prepare nodes.
-4) Package the whole environment as a docker and place at different nodes for measuring the video analytics performance, including processing delay, energy consumption cost and video analytics accuracy.
-6) record as measurement dataset.
+2) Prepare different computation nodes with divise CPU frequencies.
+3) At each node:
+   a) Download the COCO dataset from the https://cocodataset.org/#download.
+   b) Select CNN models from config_name.json and revise the user_model_list in environment.py. 
+   c) Run the environment.py for measuring the video analytics performance, including processing delay, energy consumption cost and video analytics accuracy.
+   d) Save as a result file.
+4) For simplicity, instead of configuring the above environment on each node, the entire environment on a node can be packaged as a docker mirror file and placed directly on other nodes to run docker. For how to use docker, see https://www.docker.com/. 
+
 
 ## 3. TGA-FSMC scheme
 1) prepare the measurement data.
