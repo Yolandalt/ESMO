@@ -1,2 +1,2 @@
-# Min4-FSMC
+# ESMO
 edge video analytics
