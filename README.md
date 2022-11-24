@@ -1,7 +1,4 @@
-This project is the code for Min4-FSMC Project (corresponding to the TheWebConf 2022 paper "Min4-FSMC: Lightweight Frame Scheduling and Model Caching
-for Multi-Edge Video Analytics").
-
-Link of TheWebConf 2022: https://www2022.thewebconf.org/   
+This project is the code for ESMO Project (corresponding to the IEEE Transactions on Parallel and Distributed Systems(TPDS) paper "ESMO: Joint Frame Scheduling and Model Caching for Edge Video Analytics System").
 
 # This project has three part:  
 
@@ -13,7 +10,7 @@ The **dataset** used for SGF mechanism can be found at: https://www.kaggle.com/a
 
 **Main requirement**: python3, cv2. 
 
-**Location**: Min4-FSMC/SGF. The similarity calculation can be found in SGF/Similarity2.py using the 1.jpg, 2.jpg and 3.jpg to be the examples. The SGF.py first loads the dataset for computing their similarity, and then the writes as a file for saving. The PlotFigure.py reads the similarity results file and decides which frames should be filtered, and finally the plots the result figure.
+**Location**: ESMO/SGF. The similarity calculation can be found in SGF/Similarity2.py using the 1.jpg, 2.jpg and 3.jpg to be the examples. The SGF.py first loads the dataset for computing their similarity, and then the writes as a file for saving. The PlotFigure.py reads the similarity results file and decides which frames should be filtered, and finally the plots the result figure.
 
 ## (2) edge video analytics measurements
 
@@ -27,7 +24,7 @@ There are two reasons for choosing the COCO dataset instead of the video stream-
 
 **Main requirements**：python3, opencv and detectron2.
 
-**Location**: Min4-FSMC/edgeVideo_measurements/environment.py. The environment.py is the main file of the measuremts.
+**Location**: ESMO/edgeVideo_measurements/environment.py. The environment.py is the main file of the measuremts.
 The config_name.json notes the name of CNN models and the pic_name.json notes the picture name of video frames. They will be generated during the process of running the object recognition application.
 
 ## (3) TGA-FSMC scheme
