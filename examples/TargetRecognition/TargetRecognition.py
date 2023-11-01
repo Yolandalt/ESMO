@@ -34,87 +34,29 @@ class TR_Class:
         # 有不同CNN模型
         # 云
         self.TR_Result_cloud = []
-        self.TR_Result_cloud.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_50_C4_1x.json"))
-        self.TR_Result_cloud.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_50_C4_3x.json"))
-        self.TR_Result_cloud.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_50_DC5_3x.json"))
-        self.TR_Result_cloud.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_50_FPN_1x.json"))
-        self.TR_Result_cloud.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_101_C4_3x.json"))
-        self.TR_Result_cloud.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_101_DC5_3x.json"))
-        self.TR_Result_cloud.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_101_FPN_3x.json"))
+
         # 本地
-        self.TR_Result_local = self.ReadTRResults("./TargetRecognition/data/103/mask_rcnn_R_50_C4_1x.json")
-        # self.TR_Result_local = self.ReadTRResults("./TargetRecognition/result_local.json")
-        # self.TR_Result_edge = [ [] for j in range(2) ]
-        # for edge in range(self.__n_edge):
-        #     dir_edge = "./TargetRecognition/result_edge"+str(edge)+".json"
-        #     self.TR_Result_edge.append(self.ReadTRResults(dir_edge))
+        self.TR_Result_local = []
+    
 
         self.TR_Result_edge_all = []
         # node1
         self.TR_Result_node1 = []
-        self.TR_Result_node1.append(self.ReadTRResults("./TargetRecognition/data/103/mask_rcnn_R_50_C4_1x.json"))
-        self.TR_Result_node1.append(self.ReadTRResults("./TargetRecognition/data/103/mask_rcnn_R_50_C4_3x.json"))
-        self.TR_Result_node1.append(self.ReadTRResults("./TargetRecognition/data/103/mask_rcnn_R_50_DC5_3x.json"))
-        self.TR_Result_node1.append(self.ReadTRResults("./TargetRecognition/data/103/mask_rcnn_R_50_FPN_1x.json"))
-        self.TR_Result_node1.append(self.ReadTRResults("./TargetRecognition/data/103/mask_rcnn_R_101_C4_3x.json"))
-        self.TR_Result_node1.append(self.ReadTRResults("./TargetRecognition/data/103/mask_rcnn_R_101_DC5_3x.json"))
-        self.TR_Result_node1.append(self.ReadTRResults("./TargetRecognition/data/103/mask_rcnn_R_101_FPN_3x.json"))
-        self.TR_Result_edge_all.append(self.TR_Result_node1)
 
         # node2
         self.TR_Result_node2 = []
-        self.TR_Result_node2.append(self.ReadTRResults("./TargetRecognition/data/local/mask_rcnn_R_50_C4_1x.json"))
-        self.TR_Result_node2.append(self.ReadTRResults("./TargetRecognition/data/local/mask_rcnn_R_50_C4_3x.json"))
-        self.TR_Result_node2.append(self.ReadTRResults("./TargetRecognition/data/local/mask_rcnn_R_50_DC5_3x.json"))
-        self.TR_Result_node2.append(self.ReadTRResults("./TargetRecognition/data/local/mask_rcnn_R_50_FPN_1x.json"))
-        self.TR_Result_node2.append(self.ReadTRResults("./TargetRecognition/data/local/mask_rcnn_R_101_C4_3x.json"))
-        self.TR_Result_node2.append(self.ReadTRResults("./TargetRecognition/data/local/mask_rcnn_R_101_DC5_3x.json"))
-        self.TR_Result_node2.append(self.ReadTRResults("./TargetRecognition/data/local/mask_rcnn_R_101_FPN_3x.json"))
-        self.TR_Result_edge_all.append(self.TR_Result_node2)
 
         # node3
         self.TR_Result_node3 = []
-        self.TR_Result_node3.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_50_C4_1x.json"))
-        self.TR_Result_node3.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_50_C4_3x.json"))
-        self.TR_Result_node3.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_50_DC5_3x.json"))
-        self.TR_Result_node3.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_50_FPN_1x.json"))
-        self.TR_Result_node3.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_101_C4_3x.json"))
-        self.TR_Result_node3.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_101_DC5_3x.json"))
-        self.TR_Result_node3.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_101_FPN_3x.json"))
-        self.TR_Result_edge_all.append(self.TR_Result_node3)
 
         # node4
         self.TR_Result_node4 = []
-        self.TR_Result_node4.append(self.ReadTRResults("./TargetRecognition/data/242/mask_rcnn_R_50_C4_1x.json"))
-        self.TR_Result_node4.append(self.ReadTRResults("./TargetRecognition/data/242/mask_rcnn_R_50_C4_3x.json"))
-        self.TR_Result_node4.append(self.ReadTRResults("./TargetRecognition/data/242/mask_rcnn_R_50_DC5_3x.json"))
-        self.TR_Result_node4.append(self.ReadTRResults("./TargetRecognition/data/242/mask_rcnn_R_50_FPN_1x.json"))
-        self.TR_Result_node4.append(self.ReadTRResults("./TargetRecognition/data/242/mask_rcnn_R_101_C4_3x.json"))
-        self.TR_Result_node4.append(self.ReadTRResults("./TargetRecognition/data/242/mask_rcnn_R_101_DC5_3x.json"))
-        self.TR_Result_node4.append(self.ReadTRResults("./TargetRecognition/data/242/mask_rcnn_R_101_FPN_3x.json"))
-        self.TR_Result_edge_all.append(self.TR_Result_node4)
 
         # node5
         self.TR_Result_node5 = []
-        self.TR_Result_node5.append(self.ReadTRResults("./TargetRecognition/data/jf/mask_rcnn_R_50_C4_1x.json"))
-        self.TR_Result_node5.append(self.ReadTRResults("./TargetRecognition/data/jf/mask_rcnn_R_50_C4_3x.json"))
-        self.TR_Result_node5.append(self.ReadTRResults("./TargetRecognition/data/jf/mask_rcnn_R_50_DC5_3x.json"))
-        self.TR_Result_node5.append(self.ReadTRResults("./TargetRecognition/data/jf/mask_rcnn_R_50_FPN_1x.json"))
-        self.TR_Result_node5.append(self.ReadTRResults("./TargetRecognition/data/jf/mask_rcnn_R_101_C4_3x.json"))
-        self.TR_Result_node5.append(self.ReadTRResults("./TargetRecognition/data/jf/mask_rcnn_R_101_DC5_3x.json"))
-        self.TR_Result_node5.append(self.ReadTRResults("./TargetRecognition/data/jf/mask_rcnn_R_101_FPN_3x.json"))
-        self.TR_Result_edge_all.append(self.TR_Result_node5)
 
         # node6
         self.TR_Result_node6 = []
-        self.TR_Result_node6.append(self.ReadTRResults("./TargetRecognition/data/jf/mask_rcnn_R_50_C4_1x.json"))
-        self.TR_Result_node6.append(self.ReadTRResults("./TargetRecognition/data/103/mask_rcnn_R_50_C4_3x.json"))
-        self.TR_Result_node6.append(self.ReadTRResults("./TargetRecognition/data/local/mask_rcnn_R_50_DC5_3x.json"))
-        self.TR_Result_node6.append(self.ReadTRResults("./TargetRecognition/data/102/mask_rcnn_R_50_FPN_1x.json"))
-        self.TR_Result_node6.append(self.ReadTRResults("./TargetRecognition/data/103/mask_rcnn_R_101_C4_3x.json"))
-        self.TR_Result_node6.append(self.ReadTRResults("./TargetRecognition/data/242/mask_rcnn_R_101_DC5_3x.json"))
-        self.TR_Result_node6.append(self.ReadTRResults("./TargetRecognition/data/103/mask_rcnn_R_101_FPN_3x.json"))
-        self.TR_Result_edge_all.append(self.TR_Result_node6)
 
         a = self.TR_Result_edge_all
 
